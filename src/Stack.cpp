@@ -167,3 +167,74 @@ Data Stack::searchAndPopElement(Data d) {
       return FAILURE_ELEMENT;
    }
 }
+
+/**
+ * This method, returns the stack size attribute state
+ * as integer.
+ *
+ * \return int Integer that represents the stack size.
+ */
+inline int Stack::getSize() {
+  return this->size;
+}
+
+/**
+ * This method compare if two stacks are equals.
+ * It is considerated equals if in both stacks,
+ * are founds the same elements.
+ *
+ * \param stackTwo Stack struct to be comparated.
+ * \return bool Result of comparation.
+ */
+bool Stack::equals(Stack stackTwo) {
+  if(getSize() != stackTwo.getSize()) return false;
+  if(isEmpty() && stackTwo.isEmpty()) return true;
+
+  Stack* auxStack1 = new Stack();
+  Stack* auxStack2 = new Stack();
+  
+  while(pop() == stackTwo.pop()) {
+    auxStack1->push(pop());
+    auxStack2->push(pop());
+  }
+  if(isEmpty() && stackTwo.isEmpty()) {
+    while(!auxStack1->isEmpty() && !auxStack2->isEmpty()) {
+      push(auxStack1->pop());
+      stackTwo.push(auxStack2->pop());
+    }
+    return true;
+  }else {
+    return false;
+  }
+}
+
+/**
+ * This method is responsible to print N elements presents
+ * in the stack struct. The number N is a integer parameter
+ * passed by the user to choose how many elements him wants
+ * to print out.
+ *
+ * \return string String with all elements that the user wants to print out.
+ * \param amount Integer- Amount of elements that the user wants to print out by stack.
+ */
+string Stack::print(int amount) {
+  (amount > getSize()) ? amount = getSize() : amount;
+  if(isEmpty()) return STACK_EMPTY;
+  if(amount == 0) return "";
+  if(amount == 1) return to_string(getTop());
+  Node* tmpNode = this->top;
+  
+  Stack* auxStack = new Stack();
+  string elements = "";
+  Data content;
+
+  while((amount > 0) || !isEmpty()) {
+    content = pop();
+    auxStack->push(content);
+    elements += " " + to_string(content);
+  }
+  while(!auxStack->isEmpty()) {
+    push(auxStack->pop());
+  }
+  return elements;
+}

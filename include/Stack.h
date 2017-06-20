@@ -12,6 +12,7 @@
 #define STACK_TYPE_H 1
 #define SUCCESS_MSG "Successful Operation!"
 #define FAILURE_ELEMENT -99999
+#define STACK_EMPTY "This stack is empty!"
 
 #include <string>
 
@@ -159,6 +160,42 @@ class Stack {
        */
       Data searchAndPopElement(Data d);
 
+      /**
+       * equals prototype method by stack is responsible to compare two
+       * stacks and returns if them are equal.
+       *
+       * \param stackTwo Stack struct data to be comparated.
+       * \return bool Result of comparation.
+       */
+      bool equals(Stack stackTwo);
+
+      /**
+       * This prototype method, getSize is responsible to returns the stack
+       * stack size attribute state as integer.
+       *
+       * \return int Integer that represents the stack size.
+       */
+      inline int getSize();
+
+      /**
+       * print prototype method. This method is responsible to print N elements
+       * presents in stack struct. It runs whole the stack and by a parameter passed
+       * by the user of how many elements the user wants to print out.
+       * This method doesn't remove the elements of stack.
+       *
+       * \return string String with all elements that the user wants to print out.
+       * \param amount Integer- Amount of elements that the user wants to print out by stack.
+       */
+      string print(int amount);
+
+      /**
+       * print ptototype method. This method is responsible to print all the elements
+       * presents in stack struct. It runs all the stack until it this empty. It's an
+       * overload of print method, but it one has no parameters.
+       *
+       * \return string String with all the elements presents in the stack.
+       */
+      string print();
 };
 
 #endif
