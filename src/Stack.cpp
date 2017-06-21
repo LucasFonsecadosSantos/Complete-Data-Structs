@@ -1,7 +1,7 @@
 /**
 * \file Stack.cpp
 *
-* This file contains the Stack struct data object
+* This file contains the Stack structure data object
 * implementation.
 *
 * \data Creation: 20/06/2017
@@ -9,12 +9,11 @@
 * \author Lucas Fonseca dos Santos
 */
 #include "../include/Stack.h"
-#define SUCCESS_MSG "Successful Operation!"
 
 using namespace std;
 
 /**
- * Node element object constructor.
+ * Node element object constructureor.
  *
  * \param d Node data content.
  */
@@ -24,14 +23,14 @@ Node::Node(Data d) {
 }
 
 /**
- * Node element object destructor.
+ * Node element object destructureor.
  */
 Node::~Node() {
    this->next = NULL;
 }
 
 /**
- * Stack data struct object constructor.
+ * Stack data structure object constructureor.
  */
 Stack::Stack() {
    this->top = NULL;
@@ -39,7 +38,7 @@ Stack::Stack() {
 }
 
 /**
- * Stack data struct object destructor.
+ * Stack data structure object destructureor.
  */
 Stack::~Stack() {
    if(isEmpty()) return;
@@ -56,7 +55,7 @@ Stack::~Stack() {
 
 /**
  * Push method by stack to insert new data
- * elements in struct. This method always insert
+ * elements in structure. This method always insert
  * an element on the stack top, following the stack protocol.
  *
  * \param content New insertion data content.
@@ -78,7 +77,7 @@ string Stack::push(Data content) {
 
 /**
  * Pop method by stack to remove an element 
- * in struct. This method, it always remove
+ * in structure. This method, it always remove
  * the top element, following the protocol 
  * of the stack.
  *
@@ -115,7 +114,7 @@ inline Data Stack::getTop() {
 }
 
 /**
- * This method searchs an element on stack struct and
+ * This method searchs an element on stack structure and
  * returns if this element was found. THIS METHOD NOT
  * PRESERVES THE ELEMENTS.
  *
@@ -150,22 +149,22 @@ inline Data Stack::getTop() {
 Data Stack::searchAndPopElement(Data d) {
    if(!isEmpty()) {
       if(!(d == getTop())) {
-         Stack* auxSt = new Stack();
-         while(d != getTop() && !isEmpty()) {
-            auxSt->push(pop());
-         }
-         Data result = FAILURE_ELEMENT;
-         (d == getTop()) ? result  = getTop() : result;
-         while(!auxSt->isEmpty()) {
-            push(auxSt->pop());
-         }
-         return result;
+        Stack* auxSt = new Stack();
+        while(d != getTop() && !isEmpty()) {
+           auxSt->push(pop());
+        }
+        Data result = FAILURE_ELEMENT;
+        (d == getTop()) ? result  = getTop() : result;
+        while(!auxSt->isEmpty()) {
+           push(auxSt->pop());
+        }
+        return result;
       }else {
          return pop();
       }
    }else {
-      return FAILURE_ELEMENT;
-   }
+    return FAILURE_ELEMENT;
+  }
 }
 
 /**
@@ -183,7 +182,7 @@ inline int Stack::getSize() {
  * It is considerated equals if in both stacks,
  * are founds the same elements.
  *
- * \param stackTwo Stack struct to be comparated.
+ * \param stackTwo Stack structure to be comparated.
  * \return bool Result of comparation.
  */
 bool Stack::equals(Stack stackTwo) {
@@ -210,7 +209,7 @@ bool Stack::equals(Stack stackTwo) {
 
 /**
  * This method is responsible to print N elements presents
- * in the stack struct. The number N is a integer parameter
+ * in the stack structure. The number N is a integer parameter
  * passed by the user to choose how many elements him wants
  * to print out.
  *
@@ -232,6 +231,7 @@ string Stack::print(int amount) {
     content = pop();
     auxStack->push(content);
     elements += " " + to_string(content);
+    amount--;
   }
   while(!auxStack->isEmpty()) {
     push(auxStack->pop());

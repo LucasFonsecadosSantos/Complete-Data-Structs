@@ -59,8 +59,19 @@ int main() {
     cout << "Inserction Element [6]: " << stackTwo.push(6) << "\n";
     cout << "Inserction Element [6]: " << stackTwo.push(6) << "\n";
     cout << "Inserction Element [2]: " << stackTwo.push(2) << "\n";
-    cout << "[#] ARE THE STACKS EQUALS? " << s.equals(stackTwo) << "\n";
+    //cout << "[#] ARE THE STACKS EQUALS? " << s.equals(stackTwo) << "\n";
     cout << "+--------------------------------------------+\n";
-
+    cout << "+[#] PRINT OUT WITH PARAMETER 50, > STACK SIZE:\n";
+    cout << stackTwo.print(50) << "\n";
+    cout << "+--------------------------------------------+\n";
+    cout << "+[#] PRINT OUT WITH PARAMETER 0, < STACK SIZE:\n";
+    cout << stackTwo.print(0) << "\n";
+    cout << "+--------------------------------------------+\n";
+    cout << "+[#] PRINT OUT WITH PARAMETER 4, < STACK SIZE:\n";
+    cout << stackTwo.print(4) << "\n";
+    cout << "+--------------------------------------------+\n";
+    cout << "+[#] PRINT OUT WITH PARAMETER STACK SIZE:\n";
+    cout << stackTwo.print(stackTwo.getSize()) << "\n";
+    cout << "+--------------------------------------------+\n";
     return 0;
  }

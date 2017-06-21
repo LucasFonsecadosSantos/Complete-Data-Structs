@@ -1,8 +1,8 @@
 /**
  * \file Stack.h
  *
- * This file contains the types and structs used by
- * the Stack data struct.
+ * This file contains the types and structures used by
+ * the Stack data structure.
  *
  * \date Creation: 20/06/2017
  * \date Alteration: 20/06/2017
@@ -27,7 +27,7 @@ typedef int Data;
 
 /**
  * Class that describes the node object,
- * element of the stack data struct.
+ * element of the stack data structure.
  */
 class Node {
    
@@ -45,7 +45,7 @@ class Node {
 
       /**
        * Node pointer to the next node or element in stack.
-       * This stack struct was implemented by linked form.
+       * This stack structure was implemented by linked form.
        *
        * \var next
        */
@@ -54,7 +54,7 @@ class Node {
    public:
 
       /**
-       * Constructor of node element object.
+       * Constructureor of node element object.
        * 
        * \param d Type of node content.
        * \remark If the user doesn't pass the param, him receives 0 value.
@@ -62,7 +62,7 @@ class Node {
       Node(Data d=0);
 
       /**
-       * Destructor of node element object.
+       * Destructureor of node element object.
        */
       ~Node();
 
@@ -70,10 +70,10 @@ class Node {
 
 
 /**
- * Class that describes the Stack data struct.
+ * Class that describes the Stack data structure.
  */
 class Stack {
-   
+
    private:
       
       /**
@@ -93,18 +93,18 @@ class Stack {
    public:
 
       /**
-       * Stack data struct object constructor.
+       * Stack data structure object constructureor.
        */
       Stack();
 
       /**
-       * Stack data struct object destructor.
+       * Stack data structure object destructureor.
        */
       ~Stack();
 
       /**
        * Push prototype method by stack to 
-       * insert new data elements in struct.
+       * insert new data elements in structure.
        * This method always insert an element
        * on the top of the stack, following the
        * stack ptotocol.
@@ -116,7 +116,7 @@ class Stack {
 
       /**
        * Pop prototype method by stack to
-       * remove an element in struct. This method,
+       * remove an element in structure. This method,
        * always remove the top element, following the
        * protocol of the stack.
        *
@@ -164,7 +164,7 @@ class Stack {
        * equals prototype method by stack is responsible to compare two
        * stacks and returns if them are equal.
        *
-       * \param stackTwo Stack struct data to be comparated.
+       * \param stackTwo Stack structure data to be comparated.
        * \return bool Result of comparation.
        */
       bool equals(Stack stackTwo);
@@ -179,7 +179,7 @@ class Stack {
 
       /**
        * print prototype method. This method is responsible to print N elements
-       * presents in stack struct. It runs whole the stack and by a parameter passed
+       * presents in stack structure. It runs whole the stack and by a parameter passed
        * by the user of how many elements the user wants to print out.
        * This method doesn't remove the elements of stack.
        *
@@ -190,7 +190,7 @@ class Stack {
 
       /**
        * print ptototype method. This method is responsible to print all the elements
-       * presents in stack struct. It runs all the stack until it this empty. It's an
+       * presents in stack structure. It runs all the stack until it this empty. It's an
        * overload of print method, but it one has no parameters.
        *
        * \return string String with all the elements presents in the stack.
