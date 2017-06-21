@@ -53,7 +53,7 @@ class Node {
 
    public:
 
-      /**
+      /**w
        * Constructureor of node element object.
        * 
        * \param d Type of node content.

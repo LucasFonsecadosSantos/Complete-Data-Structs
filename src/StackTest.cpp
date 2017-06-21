@@ -2,7 +2,7 @@
  * \file StackTest.cpp
  * 
  * This file contains a main function for the stack
- * tests. It tests all methods implementeds in struct.
+ * tests. It tests all methods implementeds in structure.
  *
  * \date Creation: 20/06/2017
  * \date Alteration: 20/06/2017
