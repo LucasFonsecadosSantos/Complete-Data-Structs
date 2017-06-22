@@ -10,7 +10,9 @@
  */
 #ifndef QUEUE_TYPE_H
 #define QUEUE_TYPE_H 1
-#define <string>
+#include <string>
+#define SUCCESSFUL_MSG "Operation Successful!"
+#define EMPTY_QUEUE_MSG -99999
 
 using namespace std;
 
@@ -117,7 +119,7 @@ class Queue {
 
       /**
        * This method is reponsible for the removal queue elements. He
-       * manipulates the first queue element and remove it, following the
+       * manipulates the last queue element and remove it, following the
        * queue data structure protocol. FIFO - First in, first out.
        *
        * \return Data Element dequeued.
@@ -139,6 +141,13 @@ class Queue {
        */
       inline bool isEmpty();
 
+      /**
+       * This method is responsible to print out all queue elements formatted
+       * on string.
+       *
+       * \return string String with all queue elements formmated.
+       */
+      string print();
 
 };
 
