@@ -7,7 +7,7 @@
  * \data Alteration: 23/06/2016
  * \author Lucas Fonseca dos Santos 
  */
-#include "../include/Max_Heap.h"
+//#include "../include/Max_Heap.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -53,7 +53,7 @@ Max_Heap::~Max_Heap() {
 }
 
 void Max_Heap::arrange() {
-    for(int i=(size/2-1); i>=0; i++) {
+    for(int i=(size/2-1); i>=0; i++) { //errei aqui
         arrangeDown(i);
     }
 }
