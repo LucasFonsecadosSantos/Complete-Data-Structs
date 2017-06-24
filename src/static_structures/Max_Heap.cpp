@@ -1,138 +1,111 @@
 /**
  * \file Max_Heap.cpp
  *
- * This file contains the Max heap data structure implementation methods.
+ * This file contains a max heap data structure implementation
+ * methods. This algorithm was implemented using generic programming.
  *
- * \data Creation: 23/06/2016
- * \data Alteration: 23/06/2016
- * \author Lucas Fonseca dos Santos 
+ * \date Creation: 23/06/2017
+ * \date Alteration: 23/06/2017
+ * \author Lucas Fonseca dos Santos
  */
-//#include "../include/Max_Heap.h"
-#include <iostream>
-#include <cstdlib>
+#include "../../include/static_structures/Max_Heap.h"
+#include <string>
 
 using namespace std;
 
 /**
- * Max heap structure object constructor.
- * It set states to capacity, contentHeap and size max heap attributes.
- *
- * \remark It is an overload constructor.
- * \param capacity Integer capacity value passed by the user.
+ * 
  */
-Max_Heap::Max_Heap(int capacity) {
+template<class TYPE>
+Max_Heap<TYPE>::Max_Heap(int capacity) {
     this->capacity = capacity;
-    this->contentHeap = new Data[capacity];
+    this->contentHeap = new TYPE[capacity];
     this->size = 0;
 }
 
 /**
- * Max heap structure object constructor.
- * It set states to elementsArray, size and capacity max heap attributes.
  * 
- * \remark It is an overload constructor.
- * \param elementsArray Elements array passed by the user to max heap content.
- * \param size Integer size value.
- * \param capacity Integer capacity value. 
  */
-Max_Heap::Max_Heap(Data elementsArray[], int size, int capacity) {
-    (capacity == 0)? this->capacity = size : this->capacity = capacity;
-    this->contentHeap = new Data[capacity];
-    for(int i=0; i<size; i++) {
-        contentHeap[i] = elementsArray[i];
-        this->size = size;
-    }
+template<class TYPE>
+Max_Heap<TYPE>::Max_Heap(TYPE elementsArray[], int size, int capacity) {
+    (capacity != 0)? this->capacity = capacity : this->capacity = size;
+    this->size = size;
+    this->contentHeap = new TYPE[this->capacity];
+    for(int i=0; i < size; i++)
+        this->contentHeap[i] = elementsArray[i];
     arrange();
 }
 
 /**
- * Max heap structure object destructor.
+ * 
  */
-Max_Heap::~Max_Heap() {
-    delete[] contentHeap;
+template<class TYPE>
+inline int Max_Heap<TYPE>::getFather(int position) {
+    return (position-1)/2;
 }
 
-void Max_Heap::arrange() {
-    for(int i=(size/2-1); i>=0; i++) { //errei aqui
-        arrangeDown(i);
+template<class TYPE>
+inline int Max_Heap<TYPE>::getLeftChild(int position) {
+    return (2 * position + 1);
+}
+
+template<class TYPE>
+inline int Max_Heap<TYPE>::getRightChild(int position) {
+    return (2 * position + 2);
+}
+
+template<class TYPE>
+void Max_Heap<TYPE>::arrange() {
+    for(int i = (size/2)-1; i>=0; i++) //errei aqui
+        arrangeUp(i);
+}
+
+template<class TYPE>
+void Max_Heap<TYPE>::arrangeUp(int position) {
+    int fatherPosition = getFather(position);
+    if(this->contentHeap[fatherPosition] < this->contentHeap[position]) {
+        swap(contentHeap[fatherPosition], this->contentHeap[position]);
+        arrangeUp(fatherPosition);
     }
 }
 
-inline int Max_Heap::father(int i) {
-    return (i-1)/2;
-}
-
-inline int Max_Heap::left(int i) {
-    return 2*i+1;
-}
-
-inline int Max_Heap::right(int i) {
-    return 2*i+2;
-}
-
-void Max_Heap::arrangeDown(int i) {
-    int leftChild = left(i);
-    int rightChild = right(i);
+template<class TYPE>
+void Max_Heap<TYPE>::arrangeDown(int position) {
+    int leftChildPosition = getLeftChild(position);
+    int rightChildPosition = getRightChild(position);
     int higher;
 
-    if((leftChild < this->size) && (contentHeap[leftChild] > contentHeap[i])) {
-        higher = leftChild;
-    }else {
-        higher = i;
-    }
+    (this->contentHeap[leftChildPosition] > this->contentHeap[position])? higher = leftChildPosition : higher = position;
 
-    if((rightChild < this->size) && (contentHeap[rightChild] > contentHeap[i])){
-        higher = rightChild;
-    }else {
-        higher = i;
-    }
+    (this->contentHeap[rightChildPosition] > this->contentHeap[position])? higher = rightChildPosition : higher = position;
 
-    if(i != higher) {
-        swap(contentHeap[i], contentHeap[higher]);
+    if(position != higher) {
+        swap(this->contentHeap[position], this->contentHeap[higher]);
         arrangeDown(higher);
     }
 }
 
-void Max_Heap::arrangeUp(int i) {
-    int f = father(i);
-    
-    if(contentHeap[i] > contentHeap[f]) {
-        swap(contentHeap[i], contentHeap[f]);
-        arrangeUp(f);
-    }
+template<class TYPE>
+inline TYPE Max_Heap<TYPE>::getRoot() {
+    return this->contentHeap[0];
 }
 
-void Max_Heap::print() {
-    for(int i=0; i<this->size; i++) {
-        cout << contentHeap[i] << " ";
-    }
-    cout << "\n";
-}
-
-inline Data Max_Heap::getRoot() {
-    return contentHeap[0];
-}
-
-Data Max_Heap::removeRoot() {
-    if(this->size != 0) {
-        Data rootElement = contentHeap[0];
-        swap(contentHeap[0], contentHeap[this->size - 1]);
-        this->size--;
-        arrangeDown(0);
-        return rootElement;
-    }else {
-        cout << "erro\n";
-        exit(EXIT_FAILURE);
-    }
-}
-
-void Max_Heap::insert(Data content) {
-    if(this->size == this->capacity) {
-        cout << "erro\n";
-        exit(EXIT_FAILURE);
-    }else {
-        this->contentHeap[this->size] = content;
-        arrangeUp(this->size);
+template<class TYPE>
+void Max_Heap<TYPE>::insert(TYPE data) {
+    if(this->size < this->capacity) {
+        this->contentHeap[this->size] = data;
         this->size++;
+    }else {
+        exit(EXIT_FAILURE);
     }
+}
+
+template<class TYPE>
+TYPE Max_Heap<TYPE>::print() {
+    TYPE heap;
+
+    for(int i=0; i<this->size; i++) {
+        heap += this->contentHeap[i];
+    }
+    return heap;
 }

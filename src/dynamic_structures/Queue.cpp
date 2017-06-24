@@ -7,7 +7,7 @@
  * \date Alteration: 22/06/2017
  * \author Lucas Fonseca dos Santos
  */
-#include "../include/Queue.h"
+#include "../../include/Queue.h"
 #include <string>
 
 using namespace std;

@@ -1,1 +1,0 @@
-g++ src/Stack.o src/StackTest.o src/Queue.o src/QueueTest.o -o main

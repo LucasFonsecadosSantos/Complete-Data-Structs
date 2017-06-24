@@ -8,7 +8,7 @@
 * \data Alteration: 20/06/2017
 * \author Lucas Fonseca dos Santos
 */
-#include "../include/Stack.h"
+#include "../../include/Stack.h"
 
 using namespace std;
 
