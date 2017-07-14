@@ -97,6 +97,10 @@ void BinarySearchTree::swaper(Node* oldNode, Node* newNode) {
     }
 }
 
+inline bool BinarySearchTree::isLeaf(Node* node) {
+    return ((node->left == NULL) && (node->right == NULL));
+}
+
 std::string BinarySearchTree::remove(Data content) {
 
     Node* targetNode = search(content);
@@ -106,7 +110,12 @@ std::string BinarySearchTree::remove(Data content) {
         }else if(targetNode->left == NULL) {
             swaper(targetNode, targetNode->right);
         }else {
+
             Node* successor = minimum(targetNode->right);
+
+            if(isLeaf(successor)) {
+                successor = maximum(targetNode->left);
+            }
 
             if(successor->father != targetNode) {
                 swaper(successor, successor->right);
@@ -125,6 +134,13 @@ std::string BinarySearchTree::remove(Data content) {
         return "ELEMENT NOT FOUND";
     }
 
+}
+
+Node* BinarySearchTree::maximum(Node* currentNode) {
+    while(currentNode->right != NULL) {
+        currentNode = currentNode->right;
+    }
+    return currentNode;
 }
 
 Node* BinarySearchTree::minimum(Node* tmpNode) {
@@ -182,19 +198,36 @@ std::string BinarySearchTree::preOrderPrinter(Node* currentNode) {
 
 int main() {
     BinarySearchTree* bt = new BinarySearchTree();
-    std::cout << bt->add(56);
-    std::cout << std::endl;
-    std::cout << bt->add(23);
-    std::cout << std::endl;
     std::cout << bt->add(35);
     std::cout << std::endl;
-    std::cout << bt->add(49);
+    std::cout << bt->add(14);
     std::cout << std::endl;
-    std::cout << bt->add(38);
+    std::cout << bt->add(45);
     std::cout << std::endl;
     std::cout << bt->add(6);
     std::cout << std::endl;
+    std::cout << bt->add(23);
+    std::cout << std::endl;
+    std::cout << bt->add(39);
+    std::cout << std::endl;
+    std::cout << bt->add(57);
+    std::cout << std::endl;
+    std::cout << bt->add(1);
+    std::cout << std::endl;
+    std::cout << bt->add(8);
+    std::cout << std::endl;
+    std::cout << bt->add(21);
+    std::cout << std::endl;
+    std::cout << bt->add(28);
+    std::cout << std::endl;
+    std::cout << bt->add(36);
+    std::cout << std::endl;
+    std::cout << bt->add(41);
+    std::cout << std::endl;
     std::cout << bt->add(22);
+    std::cout << std::endl;
+    std::cout << bt->add(32);
+    std::cout << bt->remove(14);
     bt->preOrderPrinter();
     std::cout << std::endl;
     bt->postOrderPrinter();
