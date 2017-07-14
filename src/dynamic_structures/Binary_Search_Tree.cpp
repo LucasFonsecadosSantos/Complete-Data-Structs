@@ -67,19 +67,17 @@ std::string BinarySearchTree::add(Data content) {
 
 Node* BinarySearchTree::search(Data content) {
     if(!isEmpty()) {
-        if(this->root->content == content) {
-            return this->root;
-        }else {
-            Node* currentNode = this->root;
-            while(currentNode != NULL) {
-                if(currentNode->content > content) {
-                    currentNode = currentNode->left;
-                }else if(currentNode->content < content) {
-                    currentNode = currentNode->right;
-                }
+        Node* currentNode = this->root;
+        while(currentNode != NULL) {
+            if(content == currentNode->content) {
+                return currentNode;
+            }else if(content > currentNode->content) {
+                currentNode = currentNode->right;
+            }else {
+                currentNode = currentNode->left;
             }
-            return currentNode;
         }
+        return currentNode;
     }else {
         return NULL;
     }
@@ -108,18 +106,99 @@ std::string BinarySearchTree::remove(Data content) {
         }else if(targetNode->left == NULL) {
             swaper(targetNode, targetNode->right);
         }else {
-            
+            Node* successor = minimum(targetNode->right);
+
+            if(successor->father != targetNode) {
+                swaper(successor, successor->right);
+                successor->right = targetNode->right;
+                successor->right->father = successor;
+            }
+            swaper(targetNode, successor);
+            successor->left = targetNode->left;
+            successor->left->father = successor;
         }
+        targetNode->left = NULL;
+        targetNode->right = NULL;
+        delete targetNode;
+        return "REMOVED";
     }else {
-        return "EMPTY TREE";
+        return "ELEMENT NOT FOUND";
     }
 
+}
+
+Node* BinarySearchTree::minimum(Node* tmpNode) {
+    while(tmpNode->left != NULL) {
+        tmpNode = tmpNode->left;
+    }
+    return tmpNode;
+}
+
+std::string BinarySearchTree::inOrderPrinter() {
+    return inOrderPrinter(this->root, 0);
+
+}
+
+std::string BinarySearchTree::inOrderPrinter(Node* currentNode, int level) {
+    std::string s;
+    if(currentNode != NULL) {
+        inOrderPrinter(currentNode->left, level+1);
+        s += currentNode->content;
+        std::cout << currentNode->content << " ";
+        inOrderPrinter(currentNode->right, level+1);
+    }
+    return s;
+}
+
+std::string BinarySearchTree::postOrderPrinter() {
+    return postOrderPrinter(this->root);
+}
+
+std::string BinarySearchTree::postOrderPrinter(Node* currentNode) {
+    std::string s;
+    if(currentNode != NULL) {
+        postOrderPrinter(currentNode->left);
+        postOrderPrinter(currentNode->right);
+        s += currentNode->content;
+        std::cout << currentNode->content << " ";
+    }
+    return s;
+}
+
+std::string BinarySearchTree::preOrderPrinter() {
+    return preOrderPrinter(this->root);
+}
+
+std::string BinarySearchTree::preOrderPrinter(Node* currentNode) {
+    std::string s;
+    if(currentNode != NULL) {
+        s += currentNode->content;
+        std::cout << currentNode->content << " ";
+        preOrderPrinter(currentNode->left);
+        preOrderPrinter(currentNode->right);
+    }
+    return s;
 }
 
 int main() {
     BinarySearchTree* bt = new BinarySearchTree();
     std::cout << bt->add(56);
+    std::cout << std::endl;
     std::cout << bt->add(23);
-
+    std::cout << std::endl;
+    std::cout << bt->add(35);
+    std::cout << std::endl;
+    std::cout << bt->add(49);
+    std::cout << std::endl;
+    std::cout << bt->add(38);
+    std::cout << std::endl;
+    std::cout << bt->add(6);
+    std::cout << std::endl;
+    std::cout << bt->add(22);
+    bt->preOrderPrinter();
+    std::cout << std::endl;
+    bt->postOrderPrinter();
+    std::cout << std::endl;
+    bt->inOrderPrinter();
     return 0;
 }
